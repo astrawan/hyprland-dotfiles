@@ -1,0 +1,21 @@
+#!/usr/sbin/env bash
+
+set -e
+
+MENU=$(distrobox list --no-color | tail -n +2 | awk '{split($0,a,"|"); print a[2]}')
+readarray -t MENU <<<$MENU
+
+MENU_WITH_ICON=()
+for i in "${!MENU[@]}"; do
+  DISTRO=$(echo "${MENU[i]}" | xargs)
+  # ICON=$(podman container inspect --format '{{.Config.Labels.name}}' "${DISTRO}" | xargs | sed 's/-toolbox//')
+  ICON="terminal-distrobox-icon"
+  MENU_WITH_ICON+=("${DISTRO}\0icon\x1f${ICON}")
+done
+
+MENU_WITH_ICON=$(printf "%s\n" "${MENU_WITH_ICON[@]}")
+SELECTED_DISTRO=$(echo -en "$MENU_WITH_ICON" | fuzzel --dmenu --icon-theme='distrobox' --placeholder='Find distros...' --width 24 --lines 10 | xargs)
+
+if [ -n "$SELECTED_DISTRO" ]; then
+  kitty --hold distrobox enter "$SELECTED_DISTRO"
+fi

@@ -1,0 +1,67 @@
+* {
+  font-family: FiraCode Nerd Font Mono Med;
+  font-size: 16px;
+}
+
+button:hover {
+  box-shadow: none; /* Remove predefined box-shadow */
+  text-shadow: none; /* Remove predefined text-shadow */
+  background: none; /* Remove predefined background color (white) */
+  transition: none; /* Disable predefined animations */
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 1);
+}
+
+window#waybar {
+  background-color: rgba(0, 0, 0, 0.1);
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
+  border-bottom: 2px solid rgba(89, 89, 89, 0.3);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-left: 2px solid rgba(89, 89, 89, 0.3);
+  border-right: 2px solid rgba(89, 89, 89, 0.3);
+  /* color: #33ccff; */
+  color: #ffffff;
+}
+
+/* window#waybar #window { */
+/*   box-shadow: 0 2px red; */
+/* } */
+
+.modules-left {
+  padding-left: 10px;
+}
+
+.modules-right {
+  padding-right: 10px;
+}
+
+#workspaces,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#backlight,
+#keyboard-state,
+#battery,
+#clock,
+#tray {
+  padding: 0 10px;
+}
+
+#workspaces button {
+  /* color: #33ccff; */
+  color: #ffffff;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+#workspaces button.active {
+  font-weight: 700;
+  /* border-top: 1px solid #33ccff; */
+  border-top: 1px solid rgba(255, 255, 255, 1);
+}
+
+#workspaces button.urgent {
+  border-top: 1px solid #ff0000;
+}

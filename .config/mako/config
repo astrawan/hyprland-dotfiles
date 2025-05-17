@@ -1,0 +1,9 @@
+# vim: syntax=dosini
+background-color=#000000cc
+border-color=#33ccffee
+border-radius=10
+default-timeout=5000
+font=FiraCode Nerd Font Mono Med
+margin=40,40,40
+padding=20
+width=420

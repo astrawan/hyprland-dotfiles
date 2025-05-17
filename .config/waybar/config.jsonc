@@ -1,0 +1,52 @@
+{
+  "exclusive": true,
+  "margin-left": 20,
+  "margin-right": 20,
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-right": ["pulseaudio", "backlight", "battery", "tray", "clock"],
+  "output": ["eDP-1"],
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": {
+      "default": ["🔆"],
+    },
+  },
+  "battery": {
+    "format": "{icon} {capacity}%",
+    "format-charging": "{icon}⚡{capacity}%",
+    "format-plugged": "{icon}⚡{capacity}%",
+    "format-full": "{icon}⚡{capacity}%",
+    "format-icons": ["🪫", "🔋", "🔋", "🔋", "🔋"],
+    // "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁾", "󰂀", "󰂁", "󰂂", "󰁹"],
+  },
+  "clock": {
+    "format": "<b>{:%a %e %b %R}</b>",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+  },
+  "pulseaudio": {
+    "format": "<big>{icon}</big> {volume}%",
+    "format-muted": "🔇 ...",
+    "format-icons": {
+      "default": ["🔈", "🔉", "🔊"],
+      "headphone": ["🎧"],
+      "hands-free": ["🎧"],
+      "phone": ["📱"],
+    },
+  },
+  "tray": {
+    "spacing": 10,
+  },
+  "hyprland/window": {
+    "format": "{}",
+    "icon": true,
+  },
+  "hyprland/workspaces": {
+    "all-outputs": true,
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+    },
+  },
+}

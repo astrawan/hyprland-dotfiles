@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -e
+
+ADDRESSES=$(hyprctl clients -j | jq -r '.[] | .address')
+readarray -t ADDRESSES <<<$ADDRESSES
+
+CLASSES=$(hyprctl clients -j | jq -r '.[] | .class')
+readarray -t CLASSES <<<$CLASSES
+
+PIDS=$(hyprctl clients -j | jq -r '.[] | .pid')
+readarray -t PIDS <<<$PIDS
+
+MENU=$(hyprctl clients -j | jq -r '.[] | .title' | awk '{printf "%s\n", $0}')
+readarray -t MENU <<<$MENU
+
+MENU_WITH_ICON=()
+for i in "${!MENU[@]}"; do
+  ICON="${CLASSES[i]}"
+  PID="${PIDS[i]}"
+
+  CPID_="${PID}"
+  PPID_=$(ps -o ppid= -p $CPID_ | xargs)
+  while [ "$PPID_" != "1" ]; do
+    CPID_="${PPID_}"
+    PPID_=$(ps -o ppid= -p $CPID_ | xargs)
+  done
+
+  FLATPAK_APP=$(flatpak ps --columns=pid,application | grep "${CPID_}" | awk '{print $2}' | xargs)
+
+  if [ -n "$FLATPAK_APP" ]; then
+    ICON="${FLATPAK_APP}"
+  fi
+
+  MENU_WITH_ICON+=("${MENU[i]}\0icon\x1f${ICON}")
+done
+
+MENU_WITH_ICON=$(printf "%s\n" "${MENU_WITH_ICON[@]}")
+INDEX=$(echo -en "$MENU_WITH_ICON" | fuzzel --dmenu --index --placeholder='Find windows...' | xargs)
+
+if [ -n "$INDEX" ]; then
+  hyprctl dispatch focuswindow "address:${ADDRESSES[$INDEX]}"
+fi
