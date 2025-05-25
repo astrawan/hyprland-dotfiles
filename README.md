@@ -29,6 +29,7 @@ rpm-ostree install \
   hypridle \
   hyprland \
   hyprlock \
+  hyprshot \
   mako \
   network-manager-applet \
   stow \
